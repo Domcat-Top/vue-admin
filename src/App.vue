@@ -1,10 +1,7 @@
 <template>
-  <div><h1>根组件</h1></div>
+  <div><router-view></router-view></div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
-
-<style>
-</style>
+<style></style>

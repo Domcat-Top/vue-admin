@@ -2,5 +2,4 @@
   <div>根组件</div>
 </template>
 
-<script>
-</script>
+<script></script>

@@ -10,24 +10,23 @@ defineProps({
   // xlink:href属性值前缀
   prefix: {
     type: String,
-    default: "#icon-",
+    default: '#icon-',
   },
   name: String,
   // 父组件传递的颜色
   color: {
-    default: "",
+    default: '',
     type: String,
   },
   width: {
-    default: "16px",
+    default: '16px',
     type: String,
   },
   height: {
-    default: "16px",
+    default: '16px',
     type: String,
   },
-});
+})
 </script>
 
-<style>
-</style>
+<style></style>

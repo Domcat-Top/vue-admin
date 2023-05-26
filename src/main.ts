@@ -26,7 +26,7 @@ import '@/styles/index.scss'
 import router from './router'
 
 // 引入大仓库
-import pinia from './store';
+import pinia from './store'
 
 // 获取应用实例对象
 const app = createApp(App)
@@ -39,7 +39,7 @@ app.use(globalComponents)
 
 app.use(router)
 
-app.use(pinia);
+app.use(pinia)
 
 // 挂载
 app.mount(`#app`)

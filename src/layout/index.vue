@@ -17,7 +17,7 @@
     <div class="layout_tabbar"></div>
     <!-- 内容展示区域 -->
     <div class="layout_main">
-      <router-view></router-view>
+      <Main></Main>
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@
 <script setup lang="ts">
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
+import Main from './main/index.vue'
 // 引入菜单组件
 import useUserStore from '@/store/modules/user'
 

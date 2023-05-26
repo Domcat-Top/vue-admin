@@ -67,7 +67,7 @@ export const constantRoute = [
       hidden: false,
       title: '数据大屏',
       icon: 'Platform',
-    }
+    },
   },
   {
     path: '/acl',
@@ -88,7 +88,7 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'User',
-        }
+        },
       },
       {
         path: '/acl/role',
@@ -99,7 +99,7 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'UserFilled',
-        }
+        },
       },
       {
         path: '/acl/permission',
@@ -110,7 +110,7 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'Monitor',
-        }
+        },
       },
     ],
   },
@@ -133,7 +133,7 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'ShoppingCartFull',
-        }
+        },
       },
       {
         path: '/product/attr',
@@ -144,7 +144,7 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'ChromeFilled',
-        }
+        },
       },
       {
         path: '/product/spu',
@@ -155,7 +155,7 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'Calendar',
-        }
+        },
       },
       {
         path: '/product/sku',
@@ -166,8 +166,8 @@ export const constantRoute = [
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
           icon: 'Orange',
-        }
+        },
       },
-    ]
-  }
+    ],
+  },
 ]

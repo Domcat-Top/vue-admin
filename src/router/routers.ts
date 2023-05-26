@@ -9,7 +9,7 @@ export const constantRoute = [
       title: '登录',
       //  代表路由标题在菜单中是否隐藏
       hidden: true,
-    }
+    },
   },
   {
     // 登陆成功以后展示数据的路由
@@ -20,6 +20,7 @@ export const constantRoute = [
       title: 'layout',
       //  代表路由标题在菜单中是否隐藏
       hidden: false,
+      icon: "Flag",
     },
     children: [
       {
@@ -29,18 +30,11 @@ export const constantRoute = [
           title: '首页',
           //  代表路由标题在菜单中是否隐藏
           hidden: false,
+          icon: "House"
+
         },
-      },
-      {
-        path: '/test',
-        component: () => import('@/views/home/index.vue'),
-        meta: {
-          title: '测试',
-          //  代表路由标题在菜单中是否隐藏
-          hidden: false,
-        },
-      },
-    ]
+      }
+    ],
   },
   {
     path: '/404',
@@ -50,7 +44,7 @@ export const constantRoute = [
       title: '404',
       //  代表路由标题在菜单中是否隐藏
       hidden: true,
-    }
+    },
   },
   {
     // 匹配路由，如果是错误的什么的，都跳转到404
@@ -61,6 +55,6 @@ export const constantRoute = [
       title: '任意路由',
       //  代表路由标题在菜单中是否隐藏
       hidden: true,
-    }
+    },
   },
 ]

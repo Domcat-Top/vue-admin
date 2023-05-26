@@ -7,7 +7,7 @@
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
-        <el-menu background-color="#001529">
+        <el-menu background-color="#001529" text-color="white">
           <!-- 根据路由动态生成菜单 -->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
@@ -40,7 +40,6 @@ let userStore = useUserStore()
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
-      color: white;
       .el-menu {
         border-right: none;
       }

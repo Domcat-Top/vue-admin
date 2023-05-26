@@ -7,6 +7,8 @@ import type { loginForm, loginResponseData } from '@/api/user/type.ts'
 import type { UserState } from './types/type'
 // 引入工具类
 import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+// 引入路由：常量路由
+import { constantRoute } from '@/router/routers' 
 // 创建用户小仓库
 // 雷神VueX，但不完全是
 let useUserStore = defineStore('User', {
@@ -14,6 +16,8 @@ let useUserStore = defineStore('User', {
   state: (): UserState => {
     return {
       token: GET_TOKEN('TOKEN'),
+      // 仓库存储生成菜单需要的数组（路由）
+      menuRoutes: constantRoute,
     }
   },
   // 异步 | 逻辑 的地方

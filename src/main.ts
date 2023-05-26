@@ -23,7 +23,10 @@ import globalComponents from '@/components/index.ts'
 import '@/styles/index.scss'
 
 // 引入路由
-import router from './router';
+import router from './router'
+
+// 引入大仓库
+import pinia from './store';
 
 // 获取应用实例对象
 const app = createApp(App)
@@ -34,7 +37,9 @@ app.use(ElementPlus, {
 
 app.use(globalComponents)
 
-app.use(router);
+app.use(router)
+
+app.use(pinia);
 
 // 挂载
 app.mount(`#app`)

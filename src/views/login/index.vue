@@ -29,7 +29,13 @@
               ></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button class="login_btn login_item" type="primary" size="default">
+              <el-button
+                class="login_btn login_item"
+                type="primary"
+                size="default"
+                :loading="controlLoading"
+                @click="login"
+              >
                 登录
               </el-button>
             </el-form-item>
@@ -42,13 +48,44 @@
 
 <script setup lang="ts">
 import { User, Lock } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+// 引入用户相关的小仓库
+import useUserStore from '@/store/modules/user'
+// 路由
+import { useRouter } from 'vue-router'
+import { ElNotification } from 'element-plus'
 
+let $router = useRouter()
+
+let useStore = useUserStore()
+let controlLoading = ref(false)
 // 账号和密码的数据
 let loginForm = reactive({
   username: 'admin',
   password: '111111',
 })
+// 想获取到成功还是失败的回调，可以用then方法，或者使用trycatch
+const login = async () => {
+  controlLoading.value = true
+  // 发登录请求
+  // 请求成功--跳转到首页
+  try {
+    await useStore.userLogin(loginForm)
+    $router.push('/')
+    ElNotification({
+      type: 'success',
+      message: '登录成功',
+    })
+    controlLoading.value = false
+  } catch (error) {
+    controlLoading.value = false
+    // 请求失败--弹出登录失败信息
+    ElNotification({
+      type: 'error',
+      message: (error as Error).message,
+    })
+  }
+}
 </script>
 
 <style scoped lang="scss">

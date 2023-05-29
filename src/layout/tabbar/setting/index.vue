@@ -1,7 +1,10 @@
 <template>
   <div class="tabbar_right">
-    <el-button size="small" icon="Refresh" circle></el-button>
+    <!-- 刷新 -->
+    <el-button size="small" icon="Refresh" circle @click="updateRefsh"></el-button>
+    <!-- 全屏 -->
     <el-button size="small" icon="FullScreen" circle></el-button>
+    <!-- 设置 -->
     <el-button size="small" icon="Setting" circle></el-button>
     <img
       src="../../../../public/logo.png"
@@ -24,8 +27,18 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
-<script>
+<script setup lang="ts">
+// 获取骨架的小仓库
+import useLayoutSettingStore from '@/store/modules/setting'
+
+let settingStore = useLayoutSettingStore()
+
+let updateRefsh = () => {
+  settingStore.refsh = ! settingStore.refsh;
+}
+
+</script>
+<script lang="ts">
 export default {
   name: 'Setting',
 }

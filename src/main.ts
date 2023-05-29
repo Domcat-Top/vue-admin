@@ -29,7 +29,7 @@ import router from './router'
 import pinia from './store'
 
 // 引入路由鉴权的文件
-import './permission.js';
+import './permission.js'
 
 // 获取应用实例对象
 const app = createApp(App)

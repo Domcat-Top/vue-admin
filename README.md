@@ -1,18 +1,79 @@
-# Vue 3 + TypeScript + Vite
+## 硅谷甄选
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+### 1. 初始化
 
-## Recommended IDE Setup
+- 使用的vite初始化项目，这里不赘述了
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### 2. 项目配置
 
-## Type Support For `.vue` Imports in TS
+1. 自动打开
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+2. eslint校验配置---检测js代码质量
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+3. prettier---确保代码美观
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+4. stylelint
+
+5. husky----git提交相关的：提交前必须注意代码格式，注释信息必须规范等
+
+   1. 这个规范校验很严格，必须使用指定的单词：
+
+      `fix: info`
+
+6. 统一包管理工具
+
+7. element-plus
+
+8. src别名----vite.config.js
+
+9. 环境变量配置
+
+10. 矢量图
+
+11. 设全局矢量图组件
+
+12. 集成sass----配置scss的全局样式，比如颜色布局啥的
+
+13. mock：注意版本
+14. axios二次封装
+
+### 3. 项目实现
+
+#### 3.1 pinia
+
+- 类似VueX，但是我个人感觉比VueX更舒服，起码方便了，没那么繁琐
+
+#### 3.2 创建路由
+
+- 学到的：
+  - 一级路由：可以直接创新的空白页
+  - 二级路由：沿用了layout，实现多个布局的复用，详情看代码，每个版本都提交了
+- 动画：mainComponents组件提取出去，可以在组件切换的时候实现动画效果
+- **注意坑：menu那里，我相信你会记住的，text-color的颜色问题，至今不知道是缓存还是图层遮罩**
+
+#### 3.3 侧边栏的缩进、顶部的面包屑实现
+
+- 操作了Style进行一个动态样式的改变，用到`&`符号，你应该记得
+- 顶部面包屑的实现，使用了原生Dom，修改了路由的默认跳转，你也应该记得
+
+#### 3.4 退出登录业务
+
+- 我删除了localstorage里面的东西，和示例代码不同，做个标记
+
+#### 3.5 路由鉴权
+
+- 自定义进度条
+- 前置路由，后置路由
+
+
+
+
+
+
+
+
+
+
+
+51
+

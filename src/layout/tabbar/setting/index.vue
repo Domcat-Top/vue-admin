@@ -24,7 +24,11 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts"></script>
+<script>
+export default {
+  name: 'Setting',
+}
 </script>
 
 <style lang="scss">

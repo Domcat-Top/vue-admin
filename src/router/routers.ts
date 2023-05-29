@@ -12,7 +12,7 @@ export const constantRoute = [
     },
   },
   {
-    // 登陆成功以后展示数据的路由---难道想用这个布局的话，只能这样写吗 
+    // 登陆成功以后展示数据的路由---难道想用这个布局的话，只能这样写吗
     path: '/',
     component: () => import('@/layout/index.vue'),
     name: 'layout',

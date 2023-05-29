@@ -4,5 +4,7 @@ import type { RouteRecordRaw } from 'vue-router'
 export interface UserState {
   token: string | null
   // 路由对象的类型
-  menuRoutes: RouteRecordRaw[]
+  menuRoutes: RouteRecordRaw[],
+  username: string | null,
+  avatar: string | null,
 }

@@ -7,14 +7,16 @@
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
         <!-- 菜单组件 -->
-        <el-menu background-color="#001529" text-color="white">
+        <el-menu :default-active="$router.path" background-color="#001529" text-color="white">
           <!-- 根据路由动态生成菜单 -->
           <Menu :menuList="userStore.menuRoutes"></Menu>
         </el-menu>
       </el-scrollbar>
     </div>
     <!-- 顶部导航 -->
-    <div class="layout_tabbar"></div>
+    <div class="layout_tabbar">
+      <Tabbar></Tabbar>
+    </div>
     <!-- 内容展示区域 -->
     <div class="layout_main">
       <Main></Main>
@@ -23,13 +25,17 @@
 </template>
 
 <script setup lang="ts">
+import {useRouter} from 'vue-router';
 import Logo from './logo/index.vue'
 import Menu from './menu/index.vue'
 import Main from './main/index.vue'
 // 引入菜单组件
 import useUserStore from '@/store/modules/user'
+// 顶部
+import Tabbar from './tabbar/index.vue';
 
 let userStore = useUserStore()
+let $router = useRouter();;
 </script>
 
 <style scoped lang="scss">
@@ -37,6 +43,7 @@ let userStore = useUserStore()
   width: 100%;
   height: 100vh;
   .layout_slider {
+    color: white;
     width: $base-menu-width;
     height: 100vh;
     background-color: $base-menu-background;
@@ -52,7 +59,6 @@ let userStore = useUserStore()
     position: fixed;
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
-    background-color: aquamarine;
     top: 0px;
     // 宽度是向左推过去一个菜单栏的宽度，秒啊
     left: $base-menu-width;

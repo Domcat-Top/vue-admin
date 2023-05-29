@@ -1,7 +1,7 @@
 // 对外暴露配置路由（常量路由）
 export const constantRoute = [
   {
-    // 登录
+    // 登录---不用那个布局，直接一层
     path: '/login',
     component: () => import('@/views/login/index.vue'),
     name: 'login', // 命令路由，做权限可能用到
@@ -12,7 +12,7 @@ export const constantRoute = [
     },
   },
   {
-    // 登陆成功以后展示数据的路由
+    // 登陆成功以后展示数据的路由---难道想用这个布局的话，只能这样写吗 
     path: '/',
     component: () => import('@/layout/index.vue'),
     name: 'layout',

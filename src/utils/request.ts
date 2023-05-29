@@ -15,10 +15,10 @@ let request = axios.create({
 // 这个是请求拦截器
 request.interceptors.request.use((config) => {
   // config配置对象，headers属性请求头，经常给服务器携带公共参数
-  let userStore = useUserStore();
+  let userStore = useUserStore()
   // 请求发送之前，如果有token，给请求头添加token
   if (userStore.token) {
-    config.headers.token = userStore.token;
+    config.headers.token = userStore.token
   }
   // 返回配置对象
   return config

@@ -40,22 +40,22 @@ let useUserStore = defineStore('User', {
     },
     // 获取用户信息的方法
     async userInfo() {
-      let result = await reqUserInfo();
+      let result = await reqUserInfo()
       // 存储一下用户信息
       if (result.code == 200) {
         // 这个如果按照上面的方法写的话，需要再去工具类创建一个类，再次封装
-        localStorage.setItem('username', result.data.checkUser.username);
-        localStorage.setItem('avatar', result.data.checkUser.avatar);
+        localStorage.setItem('username', result.data.checkUser.username)
+        localStorage.setItem('avatar', result.data.checkUser.avatar)
       } else {
-        return Promise.reject(new Error(result.data.message));
+        return Promise.reject(new Error(result.data.message))
       }
     },
     // 退出登录方法
     userLogout() {
-      localStorage.removeItem('username');
-      localStorage.removeItem('avatar');
-      localStorage.removeItem('TOKEN');
-    }
+      localStorage.removeItem('username')
+      localStorage.removeItem('avatar')
+      localStorage.removeItem('TOKEN')
+    },
   },
   getters: {},
 })

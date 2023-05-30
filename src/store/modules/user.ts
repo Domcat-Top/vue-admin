@@ -2,7 +2,8 @@
 import { defineStore } from 'pinia'
 // 引入接口
 import { reqLogin, reqUserInfo, reqLogout } from '@/api/user/index.ts'
-
+// 引入type类型
+import { loginFormData, loginResponseData, userInfoResponseData } from '@/api/user/type';
 import type { UserState } from './types/type'
 // 引入工具类
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
@@ -23,8 +24,8 @@ let useUserStore = defineStore('User', {
   },
   // 异步 | 逻辑 的地方
   actions: {
-    async userLogin(data: any) {
-      let result: any = await reqLogin(data)
+    async userLogin(data: loginFormData) {
+      let result: loginResponseData = await reqLogin(data)
       if (result.code == 200) {
         // 存储token
         this.token = result.data as string
@@ -39,7 +40,7 @@ let useUserStore = defineStore('User', {
     },
     // 获取用户信息的方法
     async userInfo() {
-      let result = await reqUserInfo()
+      let result: userInfoResponseData = await reqUserInfo()
       // 存储一下用户信息
       if (result.code == 200) {
         // 这个如果按照上面的方法写的话，需要再去工具类创建一个类，再次封装
@@ -52,15 +53,15 @@ let useUserStore = defineStore('User', {
     },
     // 退出登录方法
     async userLogout() {
-      let result = await reqLogout();
+      let result: any = await reqLogout()
       if (result.code == 200) {
         this.token = ''
         this.username = ''
         this.avatar = ''
         REMOVE_TOKEN()
-        return 'OK';
+        return 'OK'
       } else {
-        return Promise.reject(new Error(result.message));
+        return Promise.reject(new Error(result.message))
       }
     },
   },

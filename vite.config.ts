@@ -54,8 +54,8 @@ export default defineConfig(({ command, mode }) => {
           changeOrigin: true,
           // 路径重写：这里是把/api替换为 ‘’
           rewrite: (path) => path.replace(/^\/api/, ''),
-        }
-      }
-    }
+        },
+      },
+    },
   }
 })

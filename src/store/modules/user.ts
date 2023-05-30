@@ -6,7 +6,7 @@ import { reqLogin, reqUserInfo } from '@/api/user/index.ts'
 import type { loginForm, loginResponseData } from '@/api/user/type.ts'
 import type { UserState } from './types/type'
 // 引入工具类
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 // 引入路由：常量路由
 import { constantRoute } from '@/router/routers'
 // 创建用户小仓库
@@ -18,8 +18,8 @@ let useUserStore = defineStore('User', {
       token: GET_TOKEN('TOKEN'),
       // 仓库存储生成菜单需要的数组（路由）
       menuRoutes: constantRoute,
-      username: localStorage.getItem('username'),
-      avatar: localStorage.getItem('avatar'),
+      username: '',
+      avatar: '',
     }
   },
   // 异步 | 逻辑 的地方
@@ -44,17 +44,19 @@ let useUserStore = defineStore('User', {
       // 存储一下用户信息
       if (result.code == 200) {
         // 这个如果按照上面的方法写的话，需要再去工具类创建一个类，再次封装
-        localStorage.setItem('username', result.data.checkUser.username)
-        localStorage.setItem('avatar', result.data.checkUser.avatar)
+        this.username = result.data.checkUser.username
+        this.avatar = result.data.checkUser.avatar
+        return 'OK';
       } else {
-        return Promise.reject(new Error(result.data.message))
+        return Promise.reject('获取用户信息失败')
       }
     },
     // 退出登录方法
     userLogout() {
-      localStorage.removeItem('username')
-      localStorage.removeItem('avatar')
-      localStorage.removeItem('TOKEN')
+      this.token = '';
+      this.username = '';
+      this.avatar = '';
+      REMOVE_TOKEN();
     },
   },
   getters: {},

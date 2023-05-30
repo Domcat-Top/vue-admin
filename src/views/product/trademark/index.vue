@@ -38,7 +38,7 @@
               type="warning"
               size="small"
               icon="Edit"
-              @click="updateTrademark"
+              @click="updateTrademark(row)"
             ></el-button>
             <el-button type="danger" size="small" icon="Delete"></el-button>
           </template>
@@ -58,7 +58,10 @@
       />
     </el-card>
     <!-- 对话框，添加和修改时候使用 -->
-    <el-dialog v-model="dialogFormVisible" title="添加品牌">
+    <el-dialog
+      v-model="dialogFormVisible"
+      :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
+    >
       <el-form style="width: 80%">
         <el-form-item label="品牌名称：" label-width="130px">
           <el-input
@@ -104,7 +107,10 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
 // 引入需要用到的接口方法
-import { reqHasTrademark } from '@/api/product/trademark/index.ts'
+import {
+  reqHasTrademark,
+  reqAddOrUpdateTrademark,
+} from '@/api/product/trademark/index.ts'
 // 引入定义好的type
 import type {
   Records,
@@ -154,21 +160,48 @@ const sizeChange = () => {
 }
 // 添加品牌按钮的回调函数
 const addTrademark = () => {
+  // 展示数据之前，先清空了之前的数据残留
+  trademarkParams.id = 0
+  trademarkParams.tmName = ''
+  trademarkParams.logoUrl = ''
   // 控制对话框的显示
   dialogFormVisible.value = true
 }
 // 修改品牌按钮的回调函数
-const updateTrademark = () => {
+const updateTrademark = async (raw: TradeMark) => {
   // 控制对话框的显示
   dialogFormVisible.value = true
+  trademarkParams.id = raw.id
+  trademarkParams.tmName = raw.tmName
+  trademarkParams.logoUrl = raw.logoUrl
+  // 因为是使用了同一个接口，所以这里就不需要调用接口了，直接confim方法就给提交上去了
 }
 // 对话框隐藏
 const cancel = () => {
   dialogFormVisible.value = false
 }
 // 确定
-const confirm = () => {
-  dialogFormVisible.value = false
+const confirm = async () => {
+  let result: any = await reqAddOrUpdateTrademark(trademarkParams)
+  if (result.code == 200) {
+    // 关闭对话框
+    dialogFormVisible.value = false
+    // 弹出响应的提示信息
+    ElMessage({
+      type: 'success',
+      message: trademarkParams.id ? '修改品牌成功' : '添加品牌成功',
+    })
+    // 再次发请求获取全部品牌数据
+    pageNo.value = 1
+    getHasTrademark()
+  } else {
+    ElMessage({
+      type: 'error',
+      message: trademarkParams.id ? '修改品牌失败' : '添加品牌失败',
+    })
+    // 关闭对话框
+    dialogFormVisible.value = false
+  }
 }
 // 文件上传之前的钩子函数
 const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {

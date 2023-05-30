@@ -2,7 +2,14 @@
   <div>
     <el-card class="box-card">
       <!-- 卡片顶部添加按钮 -->
-      <el-button type="primary" size="default" icon="Plus">添加品牌</el-button>
+      <el-button
+        type="primary"
+        size="default"
+        icon="Plus"
+        @click="addTrademark"
+      >
+        添加品牌
+      </el-button>
       <!-- 表格组件 -->
       <el-table style="margin: 10px 0px" border :data="trademarkArr">
         <el-table-column
@@ -27,7 +34,12 @@
         </el-table-column>
         <el-table-column label="品牌操作" align="center">
           <template #="{ row, $index }">
-            <el-button type="warning" size="small" icon="Edit"></el-button>
+            <el-button
+              type="warning"
+              size="small"
+              icon="Edit"
+              @click="updateTrademark"
+            ></el-button>
             <el-button type="danger" size="small" icon="Delete"></el-button>
           </template>
         </el-table-column>
@@ -45,6 +57,35 @@
         @current-change="changePageNo"
       />
     </el-card>
+    <!-- 对话框，添加和修改时候使用 -->
+    <el-dialog v-model="dialogFormVisible" title="添加品牌">
+      <el-form style="width: 80%">
+        <el-form-item label="品牌名称：" label-width="130px">
+          <el-input placeholder="请输入品牌名称"></el-input>
+        </el-form-item>
+        <el-form-item label="品牌LOGO：" label-width="130px">
+          <el-upload
+            class="avatar-uploader"
+            action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload"
+          >
+            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
+          </el-upload>
+        </el-form-item>
+      </el-form>
+      <!-- 具名插槽footer，实现弹出框下面的两个按钮 -->
+      <template #footer>
+        <el-button type="default" size="default" @click="cancel">
+          取消
+        </el-button>
+        <el-button type="primary" size="default" @click="confirm">
+          确定
+        </el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
@@ -63,6 +104,8 @@ let limit = ref<number>(3)
 let total = ref<number>(0)
 // 详细数据
 let trademarkArr = ref<Records>([])
+// 控制对话框的显示和隐藏
+let dialogFormVisible = ref<boolean>(false)
 // 封装为函数---获取某一页的数据
 const getHasTrademark = async () => {
   let result: TradeMarkResponseData = await reqHasTrademark(
@@ -88,6 +131,53 @@ const sizeChange = () => {
   pageNo.value = 1
   getHasTrademark()
 }
+// 添加品牌按钮的回调函数
+const addTrademark = () => {
+  // 控制对话框的显示
+  dialogFormVisible.value = true
+}
+// 修改品牌按钮的回调函数
+const updateTrademark = () => {
+  // 控制对话框的显示
+  dialogFormVisible.value = true
+}
+// 对话框隐藏
+const cancel = () => {
+  dialogFormVisible.value = false
+}
+// 确定
+const confirm = () => {
+  dialogFormVisible.value = false
+}
 </script>
 
-<style></style>
+<style scoped>
+.avatar-uploader .avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
+}
+</style>
+
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  text-align: center;
+}
+</style>

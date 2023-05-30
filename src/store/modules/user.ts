@@ -1,9 +1,8 @@
 // 创建用户相关的小仓库
 import { defineStore } from 'pinia'
 // 引入接口
-import { reqLogin, reqUserInfo } from '@/api/user/index.ts'
-// 引入数据类型
-import type { loginForm, loginResponseData } from '@/api/user/type.ts'
+import { reqLogin, reqUserInfo, reqLogout } from '@/api/user/index.ts'
+
 import type { UserState } from './types/type'
 // 引入工具类
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
@@ -24,18 +23,18 @@ let useUserStore = defineStore('User', {
   },
   // 异步 | 逻辑 的地方
   actions: {
-    async userLogin(data: loginForm) {
-      let result: loginResponseData = await reqLogin(data)
+    async userLogin(data: any) {
+      let result: any = await reqLogin(data)
       if (result.code == 200) {
         // 存储token
-        this.token = result.data.token as string
+        this.token = result.data as string
         // 本地存储一份
-        SET_TOKEN(result.data.token as string)
+        SET_TOKEN(result.data as string)
         // 让当前的async函数返回一个成功的promise
         return 'OK'
       } else {
         // el组件弹出错误信息，告诉用户
-        return Promise.reject(new Error(result.data.message))
+        return Promise.reject(new Error(result.message))
       }
     },
     // 获取用户信息的方法
@@ -44,19 +43,25 @@ let useUserStore = defineStore('User', {
       // 存储一下用户信息
       if (result.code == 200) {
         // 这个如果按照上面的方法写的话，需要再去工具类创建一个类，再次封装
-        this.username = result.data.checkUser.username
-        this.avatar = result.data.checkUser.avatar
-        return 'OK';
+        this.username = result.data.username
+        this.avatar = result.data.avatar
+        return 'OK'
       } else {
-        return Promise.reject('获取用户信息失败')
+        return Promise.reject(new Error(result.message))
       }
     },
     // 退出登录方法
-    userLogout() {
-      this.token = '';
-      this.username = '';
-      this.avatar = '';
-      REMOVE_TOKEN();
+    async userLogout() {
+      let result = await reqLogout();
+      if (result.code == 200) {
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        REMOVE_TOKEN()
+        return 'OK';
+      } else {
+        return Promise.reject(new Error(result.message));
+      }
     },
   },
   getters: {},

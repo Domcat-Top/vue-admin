@@ -64,8 +64,8 @@ let fullScreen = () => {
   }
 }
 // 退出--删除数据--跳转到login页面
-const logout = () => {
-  userStore.userLogout()
+const logout = async () => {
+  await userStore.userLogout()
   // 这里还可以制定一些参数，让他登录后携带，比如跳转到哪之类的
   $router.push('/login')
 }

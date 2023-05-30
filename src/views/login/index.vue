@@ -69,7 +69,7 @@ let controlLoading = ref(false)
 // 账号和密码的数据
 let loginForm = reactive({
   username: 'admin',
-  password: '111111',
+  password: 'atguigu123',
 })
 // 获取到表单实例
 let loginForms = ref()

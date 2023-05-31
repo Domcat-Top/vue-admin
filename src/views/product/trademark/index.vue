@@ -62,14 +62,19 @@
       v-model="dialogFormVisible"
       :title="trademarkParams.id ? '修改品牌' : '添加品牌'"
     >
-      <el-form style="width: 80%">
-        <el-form-item label="品牌名称：" label-width="130px">
+      <el-form
+        style="width: 80%"
+        :model="trademarkParams"
+        :rules="rules"
+        ref="formRef"
+      >
+        <el-form-item label="品牌名称：" label-width="130px" prop="tmName">
           <el-input
             placeholder="请输入品牌名称"
             v-model="trademarkParams.tmName"
           ></el-input>
         </el-form-item>
-        <el-form-item label="品牌LOGO：" label-width="130px">
+        <el-form-item label="品牌LOGO：" label-width="130px" prop="logoUrl">
           <!-- 
             action：图片需要提交的目的地，，需要根据需求填写前缀和路由
             不然代理服务器不发送这次请求
@@ -105,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, nextTick } from 'vue'
 // 引入需要用到的接口方法
 import {
   reqHasTrademark,
@@ -133,6 +138,8 @@ let trademarkParams = reactive<TradeMark>({
   tmName: '',
   logoUrl: '',
 })
+// 获取组件实例----给组件加了ref元素，然后这样就能获取到，可能是一个新用法，俺也不太晓得
+let formRef = ref()
 // 封装为函数---获取某一页的数据
 const getHasTrademark = async () => {
   let result: TradeMarkResponseData = await reqHasTrademark(
@@ -166,9 +173,19 @@ const addTrademark = () => {
   trademarkParams.logoUrl = ''
   // 控制对话框的显示
   dialogFormVisible.value = true
+  // ts的问号语法或者nexttick
+  nextTick(() => {
+    formRef.value.clearValidate('tmName')
+    formRef.value.clearValidate('logoUrl')
+  })
 }
 // 修改品牌按钮的回调函数
 const updateTrademark = async (raw: TradeMark) => {
+  // ts的问号语法或者nexttick
+  nextTick(() => {
+    formRef.value.clearValidate('tmName')
+    formRef.value.clearValidate('logoUrl')
+  })
   // 控制对话框的显示
   dialogFormVisible.value = true
   trademarkParams.id = raw.id
@@ -182,6 +199,10 @@ const cancel = () => {
 }
 // 确定
 const confirm = async () => {
+  // 提交之前校验整个表单，主要是为了实现图片上传的校验
+  // 调用这个方法，对全部的表单元素进行验证
+  // 只有全部通过了，才执行后面的方法---加了await就是指等这个方法之行完全结束了，才执行后面的代码
+  await formRef.value.validate()
   let result: any = await reqAddOrUpdateTrademark(trademarkParams)
   if (result.code == 200) {
     // 关闭对话框
@@ -236,6 +257,34 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (
   // response是文件返回对象
   // uploadFile是文件对象 + 文件返回对象，参数更加全面了
   trademarkParams.logoUrl = response.data
+  // 文件上传成功，需要在这里手动清除掉红色的那张小字提示信息
+  formRef.value.clearValidate('logoUrl')
+}
+
+// 表单校验方法
+// 品牌ID的长度
+const validatorTmName = (rule: any, value: any, callBack: any) => {
+  // 自定义校验规则
+  if (value.trim().length >= 2) {
+    callBack()
+  } else {
+    callBack(new Error('品牌名称长度需要大于2！'))
+  }
+}
+// 图片的校验
+const validatorLogoUrl = (rule: any, value: any, callBack: any) => {
+  // value是图片上传后的路径
+  if (value) {
+    callBack()
+  } else {
+    callBack(new Error('LOGO图片务必上传！'))
+  }
+}
+// 表单校验规则对象
+const rules = {
+  // 失去焦点时执行---blur
+  tmName: [{ required: true, trigger: 'blur', validator: validatorTmName }],
+  logoUrl: [{ required: true, trigger: 'change', validator: validatorLogoUrl }],
 }
 </script>
 

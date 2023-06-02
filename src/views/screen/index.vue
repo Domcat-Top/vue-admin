@@ -1,9 +1,16 @@
 <template>
   <div>
-    <h1>数据大屏--一级</h1>
+    <el-card>
+      <img class="bigScreen" src="../../../public/bigScreen.png" alt="" />
+    </el-card>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style></style>
+<style lang="scss">
+.bigScreen {
+  width: 100%;
+  height: 95vh;
+}
+</style>

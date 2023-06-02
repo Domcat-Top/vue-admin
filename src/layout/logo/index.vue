@@ -20,7 +20,7 @@ export default {
   width: 100%;
   height: $base-menu-logo-height;
   color: white;
-  // 这说是开启了一个浮动，但是俺不懂
+  // 这开启了一个浮动
   display: flex;
   align-items: center;
   padding: 10px;

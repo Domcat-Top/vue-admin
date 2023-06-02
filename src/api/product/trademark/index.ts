@@ -33,4 +33,4 @@ export const reqAddOrUpdateTrademark = (data: TradeMark) => {
 
 // 删除某个品牌
 export const reqDeleteTrademark = (id: number) =>
-  request.delete<any, any>(API.DELETE_URL + id);
+  request.delete<any, any>(API.DELETE_URL + id)

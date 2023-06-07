@@ -11,7 +11,10 @@
           <Sex class="sex" />
           <Age class="age" />
         </div>
-        <div class="center">中间</div>
+        <div class="center">
+          <MyMap class="map" />
+          <Line class="line" />
+        </div>
         <div class="right">右侧</div>
       </div>
     </div>
@@ -24,6 +27,9 @@ import Top from './components/top/index.vue'
 import Age from './components/age/index.vue'
 import Sex from './components/sex/index.vue'
 import Tourist from './components/tourist/index.vue'
+// 中间两个子组件
+import MyMap from './components/map/index.vue'
+import Line from './components/line/index.vue'
 
 import { ref, onMounted } from 'vue'
 //获取数据大屏展示内容盒子的DOM元素
@@ -82,6 +88,14 @@ window.onresize = () => {
       }
       .center {
         flex: 2;
+        display: flex;
+        flex-direction: column;
+        .map {
+          flex: 4;
+        }
+        .line {
+          flex: 1;
+        }
       }
     }
   }

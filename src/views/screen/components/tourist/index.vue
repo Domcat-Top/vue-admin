@@ -40,14 +40,13 @@ onMounted(() => {
       // 展示的图形
       type: 'liquidFill',
       // 展示的数据
-      data: [0.6],
+      data: [0.6, 0.4, 0.3, 0.2],
       // 是否需要动画
       waveAnimation: true,
       // 动画播放时间
-      animationDuration: 3,
+      animationDuration: 10,
       // 半径
-      radius: '100%'
-
+      radius: '100%',
     },
     // 布局组件
     grid: {

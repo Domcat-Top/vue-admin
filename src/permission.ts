@@ -59,6 +59,6 @@ router.beforeEach(async (to: any, from: any, next: any) => {
 // 全局后置守卫
 router.afterEach((to: any, from: any) => {
   // 页面跳转后，修改网页页签的title
-  document.title = '硅谷甄选 - ' + to.meta.title
+  document.title = '智能调度平台 - ' + to.meta.title
   nprogress.done()
 })

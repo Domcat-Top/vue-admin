@@ -4,8 +4,7 @@
   </div>
 </template>
 
-<script>
-export default {}
+<script lang="ts">
 </script>
 
 <style></style>

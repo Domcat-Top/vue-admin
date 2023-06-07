@@ -43,6 +43,7 @@
           <span>{{ item.meta.title }}</span>
         </template>
         <!-- 这里使用递归，把孩子放进去，再次进行循环，直到最后一层 -->
+        <!-- 递归实现 -->
         <Menu :menuList="item.children"></Menu>
       </el-sub-menu>
     </template>

@@ -14,7 +14,7 @@
             ref="loginForms"
           >
             <h1>Hello</h1>
-            <h2>欢迎来到硅谷甄选</h2>
+            <h2>欢迎来到智能调度平台</h2>
             <el-form-item prop="username">
               <!-- 账号 -->
               <el-input

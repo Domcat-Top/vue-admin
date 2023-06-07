@@ -22,7 +22,7 @@ export const constantRoute = [
       hidden: false,
       icon: 'Flag',
     },
-    // 当访问根目录的时候，也就是 / ，直接给她重定向到home
+    // 当访问根目录的时候，也就是 / ，直接给他重定向到home
     redirect: '/home',
     children: [
       {

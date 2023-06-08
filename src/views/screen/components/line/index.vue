@@ -7,7 +7,7 @@
     <div class="charts" ref="charts"></div>
   </div>
 </template>
-  
+
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import * as echarts from 'echarts'
@@ -83,7 +83,7 @@ onMounted(() => {
   mycharts.setOption(option)
 })
 </script>
-  
+
 <style scoped lang="scss">
 .box5 {
   width: 100%;

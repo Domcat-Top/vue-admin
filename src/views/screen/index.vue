@@ -15,7 +15,11 @@
           <MyMap class="map" />
           <Line class="line" />
         </div>
-        <div class="right">右侧</div>
+        <div class="right">
+          <Rank class="rank" />
+          <Year class="year" />
+          <Counter class="counter" />
+        </div>
       </div>
     </div>
   </div>
@@ -30,6 +34,10 @@ import Tourist from './components/tourist/index.vue'
 // 中间两个子组件
 import MyMap from './components/map/index.vue'
 import Line from './components/line/index.vue'
+// 右边的三个组件
+import Counter from './components/counter/index.vue'
+import Rank from './components/rank/index.vue'
+import Year from './components/year/index.vue'
 
 import { ref, onMounted } from 'vue'
 //获取数据大屏展示内容盒子的DOM元素
@@ -69,7 +77,19 @@ window.onresize = () => {
     .bottom {
       display: flex;
       .right {
+        margin-left: 20px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        .counter {
+          flex: 1;
+        }
+        .rank {
+          flex: 1.5;
+        }
+        .year {
+          flex: 1;
+        }
       }
       .left {
         flex: 1;

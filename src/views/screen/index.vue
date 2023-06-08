@@ -77,7 +77,7 @@ window.onresize = () => {
     .bottom {
       display: flex;
       .right {
-        margin-left: 20px;
+        margin-left: 40px;
         flex: 1;
         display: flex;
         flex-direction: column;

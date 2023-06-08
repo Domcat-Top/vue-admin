@@ -91,10 +91,10 @@ window.onresize = () => {
         display: flex;
         flex-direction: column;
         .map {
-          flex: 4;
+          flex: 3.5;
         }
         .line {
-          flex: 1;
+          flex: 1.5;
         }
       }
     }
